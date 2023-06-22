@@ -20,6 +20,20 @@ body{
 .base_wrapper{
 	padding: 0 60px;
 }
+.main_button{
+	height: 42px;
+	padding: 0 24px;
+	border-radius: 5px;
+	background: var(--black);
+	color: white;
+	display: flex;
+	min-width: 132px;
+	align-items: center;
+	justify-content: center;
+}
+input:focus-visible{
+	outline: none;
+}
 
 
 /* HEADER */
@@ -272,7 +286,7 @@ body{
 }
 .carousel_arrows .arrow_left{
 	background: white;
-	margin-right: 12px;
+	margin-right: 16px;
 }
 .carousel_arrows .arrow_right{
 	background: var(--black);
@@ -282,6 +296,7 @@ body{
 	padding-left: 48px;
 	display: flex;
 	align-items: center;
+	overflow: hidden;
 }
 .vacancy_card{
 	display: flex;
@@ -289,9 +304,11 @@ body{
 	justify-content: space-between;
 	height: 257px;
 	padding: 28px;
+	min-width: 407px;
 	max-width: 407px;
 	background: white;
 	border-radius: 16px;
+	margin-right: 10px;
 }
 .vacancy_card .vacancy_comp{
 	font-style: 18px;
@@ -345,4 +362,148 @@ body{
 	background: var(--yellow);
 	border-radius: 8px;
 	padding: 8px 14px;
+}
+
+/* FILTERS */
+.filters{
+	margin-top: 32px;
+	margin-bottom: 1000px;
+}
+.filters_wrapper{
+	background: var(--light-grey);
+	border-radius: 16px;
+	padding: 48px 48px 71px 48px;
+}
+.filters_header{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+}
+.filters_title{
+	color: var(--black);
+	font-size: 28px;
+	font-weight: bold;
+}
+.filter_action{
+	color: var(--gray-text);
+	font-size: 16px;
+}
+.filters_body .filter_form{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: relative;
+}
+.filter_form .main_button{
+	font-size: 14px;
+	height: 50px;
+}
+.filter_input{
+	border: none;
+	outline: none;
+	font-family: var(--font);
+	font-size: 16px;
+	line-height: 130%;
+	height: 50px;
+	border-radius: 8px;
+	padding: 12px 16px;
+	color: var(--black);
+	margin-right: 8px;
+}
+.filter_input::placeholder{
+	color: var(--gray-text);
+}
+.remote_option{
+	position: absolute;
+	display: flex;
+	align-items: center;
+	bottom: -33px;
+	line-height: 120%;
+}
+.remote_option .custom_check{
+	display: none;
+}
+.remote_option .checkbox{
+	width: 42px;
+	height: 23px;
+	background: white;
+	border-radius: 25px;
+	display: flex;
+	align-items: center;
+	margin-right: 8px;
+}
+.checkbox .checkbox_check{
+	position: relative;
+	left: 2px;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background: var(--light-grey);
+	transition: left .1s ease-in-out, background .1s ease-in;
+}
+.custom_check.checked + .checkbox .checkbox_check#toggle{
+	left: 20px;
+	background: #39c671;
+}
+
+
+.selection{
+	display: flex;
+	align-items: center;
+	height: 50px;
+	width: 252px;
+	border-radius: 8px;
+	background: white;
+	margin-right: 8px;
+	color: var(--gray-text);
+	font-weight: 500;
+	position: relative;
+}
+.selection .selected{
+	display: flex;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	padding: 12px 16px;
+}
+.selection .selection_options{
+	position: absolute;
+	top: 100%;
+	display: none;
+	margin-top: 8px;
+	background: white;
+	color: var(--black);
+	width: 100%;
+	border-radius: 8px;
+	padding: 12px;
+	max-height: 280px;
+	overflow: auto;
+}
+.selection .selection_options::-webkit-scrollbar{
+	-webkit-appearance: none;
+	width: 0;
+}
+.selection .selection_options.opened{
+	display: block;
+}
+.selection .selection_options .option{
+	width: 100%;
+	padding: 8px 10px;
+}
+.selection .selection_options .option:hover{
+	background: var(--light-grey);
+	border-radius: 8px;
+	cursor: pointer;
+}
+.selection .selected.not_empty{
+	position: relative;
+	pointer-events: none;
+}
+.selection .selected.not_empty:after{
+	position: absolute;
+	content: "\2716";
+	right: 16px;
+	font-size: 12px;
+	pointer-events: all;
 }
