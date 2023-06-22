@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/media-querries.css">
+	<link rel="stylesheet" href="fonts/fonts.css">
+	<title>Rekroo » Главная</title>
+	<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+	<div class="main-content" id="mainContent">
+		<div class="page_wrapper">
+			<header class="header">
+				<div class="navbar">
+					<div class="navbar_left">
+						<div class="logo"><img src="imgs/logo.png" alt="logo" /></div>
+					</div>
+					<div class="navbar_right menu">
+						<div class="navbar_items">
+							<div class="navbar_item">Соискателям</div>
+							<div class="navbar_item">Работодателям</div>
+							<div class="navbar_item">Рекрутёрам</div>
+						</div>
+						<div class="navbar_buttons">
+							<div class="navbar_item buttonized">Добавить вакансию</div>
+							<div class="navbar_item buttonized">Создать резюме</div>
+						</div>
+						<div class="navbar_action main_button">Войти</div>
+					</div>
+				</div>
+			</header>
+			<article class="main_banner">
+				<div class="search_wrapper base_wrapper">
+					<div class="prompt_block ls_block">
+						<div class="text_mess">
+							Никогда еще не&nbsp;было так просто найти работу мечты
+						</div>
+					</div>
+					<div class="cv_fill">
+						<div class="cv_bg">
+							<div class="cv_input">
+								<div class="input_body">
+									<div class="body_left">
+										<div class="body_title">Загрузить резюме</div>
+										<div class="body_caption"><span class="colored">Выберите</span> или перетяните сюда файлы резюме в формате pdf или doc</div>
+									</div>
+									<div class="body_right">
+										<div class="body_icon"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="search_area ls_block">
+						<div class="search_title">
+							<div class="title_text">Найти вакансию</div>
+							<div class="title_caption">Смотреть все вакансии</div>
+						</div>
+						<div class="search_input" v-bind:class="icon_class">
+							<input type="text" name="search" id="search" placeholder="Должность, компания" autocomplete="off" v-on:input="hideIcon">
+						</div>
+						<div class="search_button">
+							<button class="btn btn_search">Найти работу</button>
+						</div>
+					</div>
+				</div>
+			</article>
+			<article class="carousel base_wrapper">
+				<div class="carousel_wrapper">
+					<div class="carousel_header">
+						<div class="carousel_title">
+							Лучшие вакансии недели
+						</div>
+						<div class="carousel_arrows">
+							<div class="arrow_left">&#8592;</div>
+							<div class="arrow_right">&#8594;</div>
+						</div>	
+					</div>
+					
+					<div class="carousel_body">
+						<div class="vacancy_card">
+							<div class="vacancy_comp">Рекламное агенство Нерв</div>
+							<div class="vacancy_job">Менеджер по продажам и аккаунтингу</div>
+							<div class="vacancy_tags">
+								<div class="loc_tag"><div class="tag_text">Санкт-Петербург</div></div>
+								<div class="type_tag"><div class="tag_text">Удаленно</div></div>
+							</div>
+							<div class="vacancy_salary"><span class="salary_text">от 60 000₽</span></div>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</div>
+	<script src="app.js"></script>
+	<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+</body>
+</html>

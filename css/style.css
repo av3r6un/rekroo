@@ -1,0 +1,348 @@
+:root{
+	--font: 'SF Pro Display';
+	--black: #111111;
+	--yellow: #F0DBA0;
+	--grey: #1111114D;
+	--gray-text: #ACACAC;
+	--button-pd: 0 24px;
+	--green: #C7DEDD;
+	--light-grey: #F4F3F2;
+}
+
+/* GENERAL */
+.page_wrapper{
+	max-width: 1440px;
+	margin: 0 auto;
+}
+body{
+	font-family: var(--font);
+}
+.base_wrapper{
+	padding: 0 60px;
+}
+
+
+/* HEADER */
+.header{
+	padding: 20px 60px;
+}
+.navbar{
+	display: flex;
+	align-items: center;
+	width: 100%;
+	font-size: 14px;
+	font-weight: 600;
+}
+.navbar_items{
+	display: flex;
+}
+.navbar_right{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+}
+.navbar_items{
+	margin-left: 60px;
+	display: flex;
+	align-items: center;
+}
+.navbar_item{
+	color: var(--black);
+	margin-right: 36px;
+	display: flex;
+	align-items: center;
+}
+.navbar_item:last-child{
+	margin-right: 0;
+}
+.navbar_item.buttonized{
+	margin-right: 10px;
+	padding: 0 24px;
+	height: 42px;
+	border-radius: 5px;
+	border: 1px solid var(--black);
+}
+.navbar_item.buttonized:last-child{
+	margin-right: 28px;
+}
+.navbar_action{
+	height: 42px;
+	padding: 0 24px;
+	border-radius: 5px;
+	background: var(--black);
+	color: white;
+	display: flex;
+	min-width: 132px;
+	align-items: center;
+	justify-content: center;
+}
+.navbar_buttons{
+	display: flex;
+	justify-content: flex-end;
+	margin-left: auto;
+}
+
+
+/* MAIN BANNER */
+.main_banner{
+	margin-bottom: 32px;
+}
+.search_wrapper{
+	max-height: 635px;
+	width: 100%;
+	padding: 0 60px;
+	font-weight: 600;
+	display: grid;
+	grid-template-columns: 1fr auto;
+	grid-gap: 16px;
+}
+.ls_block{
+	padding: 60px 48px;
+	background: var(--light-grey);
+	border-radius: 16px;
+}
+.prompt_block, .search_area{
+	grid-column: 1;
+	grid-row: 1;
+}
+.search_area{
+	grid-row: 2;
+}
+.prompt_block .text_mess{
+	font-size: 64px;
+	font-weight: 800;
+}
+.search_title{
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
+}
+.search_title .title_caption{
+	color: var(--gray-text);
+	position: relative;
+	margin-right: 20px;
+}
+.search_title .title_text{
+	font-weight: bold;
+	font-size: 28px;
+}
+.title_caption:after{
+	position: absolute;
+	content: "\2193";
+	width: 20px;
+	height: 20px;
+	margin-left: 12px;
+}
+.search_input{
+	position: relative;
+	display: flex;
+	align-items: center;
+	margin-top: 20px;
+	margin-bottom: 12px;
+}
+.search_input input{
+	width: 100%;
+	height: 50px;
+	padding: 14px;
+	border: none;
+	background: none;
+	font-size: 16px;
+	font-family: var(--font);
+	line-height: 130%;
+}
+.search_button{
+	width: 100%;
+}
+.btn_search{
+	width: 100%;
+	border-radius: 5px;
+	padding: 16px 24px;
+	text-align: center;
+	background: var(--black);
+	color: white;
+	font-size: 14px;
+	font-weight: 600;
+	font-family: var(--font);
+}
+.search_input #search::placeholder{
+	padding-left: 36px;
+}
+.search_input #search:focus-visible{
+	outline: none;
+}
+.search_input:before{
+	position: absolute;
+	visibility: visible;
+	content: "";
+	background: url('../imgs/search.svg') no-repeat 100% 100%/ cover;
+	width: 24px;
+	height: 24px;
+	margin-left: 14px;
+}
+.search_input.without_icon:before{
+	visibility: hidden;
+}
+.cv_fill{
+	height: 635px;
+	grid-column: 2;
+	grid-row: 1 / span 2;
+	width: 582px;
+}
+.cv_bg{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	background: url('../imgs/chats.png') no-repeat 5% 30%,
+				url('../imgs/doodles.png') no-repeat 6% 65%,
+				url('../imgs/team.png') no-repeat 80% / contain,
+				var(--green);
+	height: 100%;
+	object-fit: contain;
+	border-radius: 16px;
+}
+.cv_input{
+	position: absolute;
+	display: flex;
+	align-content: center;
+	top: 66%;
+	width: 78%;
+	height: 105px;
+	background: white;
+	border-radius: 10px;
+}
+.input_body{
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+	font-weight: 500;
+	padding: 24px;
+}
+.body_left .body_title{
+	margin-bottom: 10px;
+	font-size: 16px;
+	font-weight: 600;
+}
+.body_caption .colored{
+	color: #71a3bc;
+}
+.body_left .body_caption{
+	max-width: 75%;
+}
+.body_right .body_icon{
+	border-radius: 50%;
+	background: url('../imgs/share.svg') no-repeat 50% 50%,
+				var(--yellow);
+	height: 50px;
+	width: 50px;
+}
+
+/* CAROUSEL */
+.carousel_wrapper{
+	background: var(--light-grey);
+	border-radius: 16px;
+	padding: 64px 0;
+}
+.carousel_header{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 48px;
+	margin-bottom: 40px;
+}
+.carousel_header .carousel_title{
+	font-size: 48px;
+	font-weight: bold;
+}
+.carousel_arrows{
+	display: flex;
+	align-items: center;
+}
+.carousel_arrows .arrow_left,
+.carousel_arrows .arrow_right{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 54px;
+	width: 54px;
+	border-radius: 50%;
+	font-size: 20px;
+}
+.carousel_arrows .arrow_left{
+	background: white;
+	margin-right: 12px;
+}
+.carousel_arrows .arrow_right{
+	background: var(--black);
+	color: white;
+}
+.carousel_body{
+	padding-left: 48px;
+	display: flex;
+	align-items: center;
+}
+.vacancy_card{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 257px;
+	padding: 28px;
+	max-width: 407px;
+	background: white;
+	border-radius: 16px;
+}
+.vacancy_card .vacancy_comp{
+	font-style: 18px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	color: var(--black);
+	overflow: hidden;
+}
+.vacancy_card .vacancy_job{
+	font-size: 22px;
+	font-weight: bold;
+}
+.vacancy_card .vacancy_tags{
+	display: flex;
+	align-items: center;
+}
+.vacancy_card .vacancy_tags > div{
+	margin-right: 6px;
+	border-radius: 8px;
+	background: var(--light-grey);
+	padding: 8px 14px;
+	font-size: 16px;
+	font-weight: 500;
+}
+.vacancy_card .vacancy_tags > div:last-child{
+	margin-right: 0;
+}
+.vacancy_tags .tag_text{
+	margin-left: 28px;
+}
+.vacancy_tags .loc_tag,
+.vacancy_tags .type_tag{
+	position: relative;
+}
+.vacancy_tags .loc_tag:before,
+.vacancy_tags .type_tag:before{
+	position: absolute;
+	content: "";
+	height: 24px;
+	width: 24px;
+	top: calc(50% - 12px);
+	left: 12px;
+}
+.type_tag:before{
+	background: url('../imgs/Remote.svg') no-repeat 100% / contain;
+}
+.loc_tag:before{
+	background: url('../imgs/Geo.svg') no-repeat 100% / contain;
+}
+.vacancy_salary .salary_text{
+	background: var(--yellow);
+	border-radius: 8px;
+	padding: 8px 14px;
+}
