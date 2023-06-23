@@ -93,6 +93,7 @@ var basic = new Vue({
 				cur_target.innerHTML = cur_target.getAttribute('data-default');
 				cur_target.classList.remove('not_empty');
 			} else if (cur_target.className === 'selected'){
+				this.closeOthers();
 				var selection = cur_target.parentElement.querySelector('.selection_options');
 				if (selection.classList.contains('opened')){
 					selection.classList.remove('opened');
@@ -104,6 +105,16 @@ var basic = new Vue({
 				cur_target.parentElement.classList.remove('opened');
 				cur_target.parentElement.parentElement.querySelector('.selected').classList.add('not_empty');
 			}
-		},
+		}, 
+		closeOthers: function(){
+			var current = event.target;
+			var current_name = current.getAttribute('data-default');
+			var item = $('.' + current.className).parent('.selection').parent('.filter_form').children('.selection');
+			$.each(item, function(){
+				if (($(this).children('.selection_options').hasClass('opened')) && $(this).children('.selected').attr('data-default') !== current_name){
+					$(this).children('.selection_options').removeClass('opened');
+				}
+			})
+		}
 	}
 });
