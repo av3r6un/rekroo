@@ -1,0 +1,453 @@
+@media screen and (max-width: 1452px){
+	.search_wrapper .prompt_block .text_mess{
+		font-size: 60px;
+	}
+}
+@media screen and (max-width: 1415px){
+	.search_wrapper .prompt_block .text_mess{
+		font-size: 50px;
+	}
+}
+@media screen and (max-width: 1317px){
+	.search_wrapper .prompt_block .text_mess{
+		font-size: 42px;
+	}
+}
+@media screen and (max-width: 1247px){
+	.search_wrapper{
+		display: flex;
+		flex-direction: column;
+		height: auto;
+		grid-gap: 0;
+		max-height: unset;
+		grid-template-columns: none;
+	}
+	.search_wrapper .prompt_block .text_mess{
+		font-size: 54px;
+	}
+	.prompt_block:first-child{
+		border-radius: 16px 16px 0 0;
+		padding-bottom: 14px;
+	}
+	.search_area{
+		margin-top: 12px;
+	}
+	.cv_fill{
+		height: auto;
+		background: var(--light-grey);
+		border-radius: 0 0 16px 16px;
+		padding: 0 40px 40px 40px;
+		width: 100%;
+	}
+	.cv_team{
+		display: block;
+	}
+	.cv_bg{
+		border-radius: 8px;
+		height: 264px;
+		background: url('../imgs/chats.png') no-repeat 30% 10% / 18%,
+    				url('../imgs/doodles.png') no-repeat 8% 48%,
+    				var(--green);
+	}
+	.cv_input{
+		top: calc(74% - 55px);
+		width: 45%;
+		left: 11%;
+		justify-content: center;
+	}
+}
+@media screen and (max-width: 1160px){
+	.cv_fill .cv_bg{
+		background: url('../imgs/chats.png') no-repeat 30% 10% / 22%,
+    				url('../imgs/doodles.png') no-repeat 8% 48%,
+    				var(--green);
+	}
+	.navbar{
+		justify-content: space-between;
+	}
+	.navbar_right{
+		display: none;
+	}
+	.navbar_mini{
+		display: flex;
+	}
+	.filter_form{
+		display: grid !important;
+		grid-gap: 10px;
+		grid-template-columns: repeat(4, 1fr);
+	}
+	.filter_form .filter_input{
+		grid-column: 1 / -1;
+	}
+	.filter_form .main_button{
+		grid-column: 1 / -1;
+		margin-top: 40px;
+	}
+	.filter_form .remote_option{
+		bottom: 65px;
+	}
+	.filter_form .filter_input{
+		margin-right: 0;
+	}
+	.filter_form .selection{
+		width: auto;
+		margin-right: 0;
+	}
+}
+@media screen and (max-width: 1000px){
+	.search_wrapper .cv_input{
+		min-width: 350px;
+	}
+	.carousel .carousel_title{
+		font-size: 36px;
+	}
+	.carousel .carousel_body .vacancy_card{
+		padding: 20px;
+		border-radius: 12px;
+		height: 203px;
+		max-width: 40%;
+	}
+	.vacancy_card .vacancy_comp{
+		font-size: 14px;
+	}
+	.vacancy_card .vacancy_job{
+		font-size: 18px;
+	}
+	.vacancy_card .vacancy_tags{
+		font-size: 12px;
+	}
+	.vacancy_tags .loc_tag .tag_text{
+		white-space: nowrap;
+	}
+	.vacancy_tags .tag_text{
+		margin-left: 20px;
+	}
+	.vacancy_tags .loc_tag:before,
+	.vacancy_tags .type_tag:before{
+		width: 20px;
+		height: 20px;
+		background-size: 100%;
+		top: calc(50% - 10px);
+		left: 8px;
+	}
+
+	.vacancies .button_wrapper .load_more{
+		width: 100%;
+	}
+
+	.footer .logo{
+		display: none;
+	}
+	.footer .download{
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	.footer .download .appstore{
+		margin-right: 0;
+		margin-bottom: 8px;
+	}
+	.footer .navbar_item,
+	.footer .info_item,
+	.footer .copy{
+		font-size: 14px;
+	}
+}
+@media screen and (max-width: 890px){
+	.filter_form{
+		font-size: 14px;
+	}
+	.carousel .carousel_body .vacancy_card{
+		max-width: 48%;
+	}
+}
+@media screen and (max-width: 860px){
+	.footer .download .appstore,
+	.footer .download .playmarket{
+		width: 118px;
+		height: 40px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.footer .download .appstore img,
+	.footer .download .playmarket img{
+		transform: scale(0.7);
+	}
+
+}
+@media screen and (max-width: 768px){
+	.cv_fill .cv_bg{
+		background: url('../imgs/chats.png') no-repeat 30% 10% / 30%,
+        url('../imgs/doodles.png') no-repeat 6% 50%,
+        var(--green);
+	}
+	.carousel .carousel_body .vacancy_card{
+		width: 276px;
+		max-width: unset;
+		font-size: 12px;
+	}
+	.carousel .vacancy_card .vacancy_job{
+		font-size: 18px;
+	}
+	.carousel .carousel_title{
+		font-size: 32px;
+	}
+	.vacancy_card .tag_text{
+		font-size: 12px;
+	}
+	.vacancy_tags .loc_tag:before,
+	.vacancy_tags .type_tag:before{
+		width: 20px;
+		height: 20px;
+		background-size: 90%;
+		top: calc(50% - 10px);
+		left: 6px;
+	}
+	.vacancy_tags .tag_text{
+		margin-left: 14px;
+	}
+	.filter_form{
+		display: grid !important;
+		grid-gap: 10px;
+		grid-template-columns: 1fr 1fr;
+	}
+	.filter_form .filter_input{
+		grid-column: 1 / -1;
+		grid-row: 1;
+	}
+	.filter_form .main_button{
+		grid-column: 1 / -1;
+		margin-top: 40px;
+		grid-row:4;
+	}
+	.filter_form .remote_option{
+		bottom: 65px;
+	}
+	.filter_form .filter_input{
+		margin-right: 0;
+	}
+	.filter_form .selection{
+		width: auto;
+		margin-right: 0;
+	}
+	.vacancies_wrapper .vacancy_footer{
+		display: none;
+	}
+	.footer .footer_wrapper{
+		padding: 28px;
+		height: 184px;
+	}
+	.footer .navbar_column{
+		margin-right: 18px;
+	}
+}
+@media screen and (max-width: 650px){
+	.search_wrapper .prompt_block .text_mess{
+		font-size: 38px;
+	}
+	.cv_fill .cv_bg{
+		background: url('../imgs/chats.png') no-repeat 16% 8% / 40%,
+				url('../imgs/doodles.png') no-repeat 5% 50% / 5%,
+				url('../imgs/team.png') no-repeat 90% / contain,
+				var(--green);
+	}
+	.cv_bg .cv_team{
+		display: none;
+	} 
+	.cv_bg .cv_input{
+		left: calc(50% - 175px);
+	}
+	.cv_input .input_body{
+		padding: 18px;
+	}
+	.input_body .body_right .body_icon{
+		height: 40px;
+		width: 40px;
+		background-size: 50%;
+	}
+	.search_area .title_caption{
+		display: none;
+	}
+	.search_area .title_text{
+		font-size: 22px;
+	}
+	.carousel_arrows{
+		display: none;
+	}
+	.carousel_wrapper{
+		padding: 52px 0;
+	}
+	.footer .footer_wrapper{
+		height: auto;
+	}
+	.footer .download{
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+	}
+	.footer .download .appstore,
+	.footer .download .playmarket{
+		width: 167px;
+		height: 58px;
+		padding: 9px 16px;
+	}
+	.footer .download .appstore img,
+	.footer .download .playmarket img{
+		transform: scale(1);
+	}
+	.footer .footer_left{
+		margin-bottom: 20px;
+		width: 100%;
+	}
+	.footer .footer_right{
+		width: 100%;
+	}
+	.footer .download .appstore{
+		margin-bottom: 0;
+		margin-right: 8px;
+	}
+	.footer .footer_body{
+		flex-direction: column;
+		align-items: start;
+	}
+	.footer .footer_body .copy{
+		display: none;
+	}
+	.footer .footer_right .footer_navbar{
+		flex-direction: column;
+		align-items: start;
+	}
+	.footer .footer_right .hr{
+		display: block;
+		height: 1px;
+		background: rgba(255, 255, 255, .5);
+		width: 100%;
+		margin: 20px 0;
+	}
+	.footer .footer_info .copy{
+		display: block;
+		margin-bottom: 8px;
+	}
+}
+@media screen and (max-width: 540px){
+	.header{
+		padding: 20px;
+	}
+	.header .menu_wrapper .burger_menu{
+		right: 20px;
+	}
+	.base_wrapper{
+		padding: 0 20px;
+	}
+	.search_wrapper .prompt_block{
+		padding: 48px 20px 28px 20px;
+	}
+	.search_wrapper .prompt_block .text_mess{
+		font-size: 31px;
+	}
+	.cv_fill{
+		padding: 0 20px 20px 20px;
+	}
+	.cv_fill .cv_bg{
+		background: url('../imgs/chats.png') no-repeat 16% 10% / 45%,
+    url('../imgs/doodles.png') no-repeat 4% 50% / 6%,
+    url('../imgs/team.png') no-repeat 90% / contain,
+    var(--green);
+	}
+	.cv_fill .cv_input{
+		min-width: 300px;
+		left: calc(50% - 150px);
+
+	}
+	.carousel .carousel_body .vacancy_card{
+		max-width: 80%;
+		width: auto;
+		min-width: unset;
+	}
+	.vacancies .vacancy .company .company_name{
+		font-size: 16px;
+	}
+	.vacancies .vacancy .company .company_image{
+		width: 40px;
+		height: 40px;
+	}
+	.vacancies .vacancy .company .company_image img{
+		width: 40px;
+		height: 40px;
+	}
+	.vacancies .job_title{
+		font-size: 18px;
+	}
+	.vacancies .job_description{
+		font-size: 14px;
+		text-overflow: ellipsis;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		display: -webkit-box;
+		overflow: hidden;
+	}
+	.vacancies .vacancy_tags{
+		flex-wrap: wrap;
+	}
+	.vacancies .vacancy_tags > div{
+		margin-bottom: 4px;
+	}
+	.vacancies .button_wrapper{
+		margin-top: 40px;
+	}
+	.footer{
+		margin-top: 60px;
+	}
+
+}
+
+@media screen and (max-width: 412px){
+	.filters{
+		display: none;
+	}
+	.footer .download .appstore,
+	.footer .download .playmarket{
+		width: 135px;
+		height: 40px;
+		padding: 9px 16px;
+	}
+	.footer .download .appstore img,
+	.footer .download .playmarket img{
+		transform: scale(0.7);
+	}
+	.search_wrapper .prompt_block .text_mess{
+		font-size: 28px;
+	}
+	.cv_fill .cv_input{
+		min-width: 250px;
+		left: calc(50% - 125px);
+	}
+	.cv_input .input_body{
+		padding: 10px 18px;
+	}
+	.cv_fill .cv_bg{
+		background: url('../imgs/chats.png') no-repeat 10% 23% / 45%,
+    				url('../imgs/team.png') no-repeat 90% / contain,
+    				var(--green);
+	}
+	.cv_input .body_left .body_title{
+		font-size: 14px;
+	}
+	.cv_input .body_left .body_caption{
+		max-width: 85%;
+		font-size: 11px;
+	}
+	.search_wrapper .search_area{
+		padding: 28px 20px;
+	}
+	.carousel .carousel_header{
+		padding: 0 20px;
+	}
+	.carousel .carousel_title{
+		font-size: 28px;
+	}
+	.carousel .carousel_body {
+		padding-left: 20px;
+	}
+}

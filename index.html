@@ -11,6 +11,8 @@
 	<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 	<!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+	<script src="https://unpkg.com/element-ui/lib/index.js"></script>
 </head>
 <body>
 	<div class="main-content" id="mainContent">
@@ -32,19 +34,44 @@
 						</div>
 						<div class="navbar_action main_button">Войти</div>
 					</div>
+					<div class="navbar_mini">
+						<div class="navbar_burger" v-on:click="openBurger">
+							<div class="menu_wrapper" v-on:click="closeBurger">
+								<div class="burger_menu">
+									<div class="menu_item">Соискателям</div>
+									<div class="menu_item">Работодателям</div>
+									<div class="menu_item">Рекрутерам</div>
+									<div class="hr"></div>
+									<div class="menu_button">Добавить вакансию</div>
+									<div class="menu_button">Создать резюме</div>
+								</div>
+							</div>
+						</div>
+						<div class="navbar_action mini_button"></div>
+					</div>
 				</div>
 			</header>
-			<article class="main_banner">
+			<article class="main_banner basic">
 				<div class="search_wrapper base_wrapper">
 					<div class="prompt_block ls_block">
 						<div class="text_mess">
-							Никогда еще не&nbsp;было так просто найти работу мечты
+							Никогда еще<br>не&nbsp;было так просто найти работу&nbsp;мечты
 						</div>
 					</div>
 					<div class="cv_fill">
 						<div class="cv_bg">
+							<div class="cv_team"></div>
 							<div class="cv_input">
-								<div class="input_body">
+								<!-- <div class="input_body">
+									<div class="body_left">
+										<div class="body_title">Загрузить резюме</div>
+										<div class="body_caption"><span class="colored">Выберите</span> или перетяните сюда файлы резюме в формате pdf или doc</div>
+									</div>
+									<div class="body_right">
+										<div class="body_icon"></div>
+									</div>  :on-remove="" :file-list=""
+								</div> -->
+								<el-upload class="input_body" drag action="" accept="application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document" :on-preview="handlePreview">
 									<div class="body_left">
 										<div class="body_title">Загрузить резюме</div>
 										<div class="body_caption"><span class="colored">Выберите</span> или перетяните сюда файлы резюме в формате pdf или doc</div>
@@ -52,7 +79,7 @@
 									<div class="body_right">
 										<div class="body_icon"></div>
 									</div>
-								</div>
+								</el-upload>
 							</div>
 						</div>
 					</div>
@@ -70,11 +97,11 @@
 					</div>
 				</div>
 			</article>
-			<article class="carousel base_wrapper">
+			<article class="carousel base_wrapper basic">
 				<div class="carousel_wrapper">
 					<div class="carousel_header">
 						<div class="carousel_title">
-							Лучшие вакансии недели
+							Лучшие вакансии&nbsp;недели
 						</div>
 						<div class="carousel_arrows">
 							<div class="arrow_left">&#8592;</div>
@@ -95,14 +122,14 @@
 					</div>
 				</div>
 			</article>
-			<article class="filters base_wrapper">
+			<article class="filters base_wrapper" id="basic">
 				<div class="filters_wrapper">
 					<div class="filters_header">
 						<div class="filters_title">Фильтры</div>
 						<div class="filter_action" v-on:click="clearFilters">Сбросить все</div>
 					</div>
 					<div class="filters_body">
-						<form class="filter_form">
+						<form class="filter_form" v-on:submit.prevent="handleFilters">
 							<div class="remote_option">
 								<input type="checkbox" name="remote" id="remote" v-on:change="onOff" v-bind:class="remote_work" class="custom_check">
 								<div class="checkbox" v-on:click="changeState">
@@ -110,11 +137,11 @@
 								</div>
 								<div class="checkbox_label"><label for="remote">Можно удаленно</label></div>
 							</div>
-							<input type="text" name="position" id="position" class="filter_input" placeholder="Должность">
-							<input type="hidden" name="city">
-							<input type="hidden" name="area">
-							<input type="hidden" name="type">
-							<input type="hidden" name="salary">
+							<input type="text" name="position" id="position" class="filter_input" placeholder="Должность" autocomplete="off">
+							<input type="hidden" name="city" id="filterCity">
+							<input type="hidden" name="area" id="filterArea">
+							<input type="hidden" name="type" id="filterType">
+							<input type="hidden" name="salary" id="filterSalary">
 							<div v-for="selection in selections" class="selection" v-on:click="toggleOptions">
 								<div class="selection_options" :data-target="selection.name">
 									<div class="option" v-for="option in selection.options">{{option}}</div>
@@ -126,59 +153,87 @@
 					</div>
 				</div>
 			</article>
-			<article class="vacancies">
-				<div class="vacancies_wrapper">
-					<div class="vacancy">
-						<div class="vacancy_body">
-							<div class="company">
-								<div class="company_image">
-									<img src="imgs/comp_img.png" alt="nerv_img">
+			<article class="vacancies base_wrapper" id="vacancies">
+				<section v-if="rendering">
+					<section v-if="errored">
+						<p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
+					</section>
+					<section v-else>
+						<div class="vacancies_wrapper">
+							<div class="loading" v-if="loading">Loading..</div>
+							<div class="loading-complete" v-else>
+								<div class="result" v-if="info.data.count !== 0">
+									<div class="vacancy" v-for="vacancy in info.data.response" :data-id="vacancy.id">
+										<div class="vacancy_body">
+											<div class="company">
+												<div class="company_image">
+													<img v-if="vacancy.company_info.image" :src="vacancy.company_info.image" alt="company_img">
+													<div v-else class="default_img"></div>
+												</div>
+												<div class="company_name">{{vacancy.company_info.title}}</div>
+											</div>
+											<div class="job_title">{{vacancy.position}}</div>
+											<div class="job_description">
+												<p class="description">{{vacancy.description}}</p>
+											</div>
+											<div class="vacancy_tags">
+												<div class="loc_tag"><div class="tag_text">{{vacancy.location}}</div></div>
+												<div class="type_tag" v-if="vacancy.remote_work !== 0">
+													<div class="tag_text">{{remote_work_options[vacancy.remote_work]}}</div>
+												</div>
+											</div>
+											<div class="vacancy_footer">
+												<div class="vacancy_salary">
+													<span class="salary_text" v-if="vacancy.salary_to && vacancy.salary_from !== '0'">{{vacancy.salary_from}} – {{vacancy.salary_to}} {{currencies[vacancy.currency]}}</span>
+													<span class="salary_text" v-else-if="vacancy.salary_from === 0">{{currencies[vacancy.currency]}} по договеренности</span>
+													<span class="salary_text" v-else >от {{vacancy.salary_from}} {{currencies[vacancy.currency]}}</span>
+												</div>
+												<div class="vacancy_about" :data-target="vacancy.id">Подробнее о вакансии</div>
+											</div>
+										</div>
+									</div>	
 								</div>
-								<div class="company_name">Рекламное агенство Нерв</div>
+								<div class="result empty" v-else>
+									Вакансии не найдены. Попробуйте изменить фильтры
+								</div>
 							</div>
-							<div class="job_title">Менеджер про продажам и аккаунтингу</div>
-							<div class="job_description">
-								<p class="description">Ищем в команду самостоятельного и инициативного менеджера, который поможет команде искать и привлекать новых клиентов, продавать B2B проекты и поддерживать коммуникацию на всех этапах.</p>
-							</div>
-							<div class="vacancy_tags">
-								<div class="loc_tag"><div class="tag_text">Санкт-Петербург</div></div>
-								<div class="type_tag"><div class="tag_text">Удаленно</div></div>
-							</div>
-							<div class="vacancy_footer">
-								<div class="vacancy_salary"><span class="salary_text">от 60 000₽</span></div>
-								<div class="vacancy_about">Подробнее о вакансии</div>
+						</div>
+					</section>
+				</section>
+				<section v-else>
+					<div class="vacancies_wrapper">
+						<div class="vacancy">
+							<div class="vacancy_body">
+								<div class="company">
+									<div class="company_image">
+										<img src="imgs/comp_img.png" alt="company_img">
+										<div class="default_img"></div>
+									</div>
+									<div class="company_name">Рекламное агенство Нерв</div>
+								</div>
+								<div class="job_title">Менеджер по продажам и аккаунтингу</div>
+								<div class="job_description">
+									<p class="description">Ищем в команду самостоятельного и инициативного менеджера, который поможет команде искать и привлекать новых клиентов, продавать B2B проекты и поддерживать коммуникацию на всех этапах.</p>
+								</div>
+								<div class="vacancy_tags">
+									<div class="loc_tag"><div class="tag_text">Санкт-Петербург</div></div>
+									<div class="type_tag"><div class="tag_text">Удаленно</div></div>
+									<div class="salary_tag vacancy_salary"><div class="tag_text">от 60 000 ₽</div></div>
+								</div>
+								<div class="vacancy_footer">
+									<div class="vacancy_salary"><span class="salary_text">от 60 000 ₽</span></div>
+									<div class="vacancy_about">Подробнее о вакансии</div>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="vacancy">
-						<div class="vacancy_body">
-							<div class="company">
-								<div class="company_image">
-									<img src="imgs/comp_img.png" alt="nerv_img">
-								</div>
-								<div class="company_name">Рекламное агенство Нерв</div>
-							</div>
-							<div class="job_title">Менеджер про продажам и аккаунтингу</div>
-							<div class="job_description">
-								<p class="description">Ищем в команду самостоятельного и инициативного менеджера, который поможет команде искать и привлекать новых клиентов, продавать B2B проекты и поддерживать коммуникацию на всех этапах.</p>
-							</div>
-							<div class="vacancy_tags">
-								<div class="loc_tag"><div class="tag_text">Санкт-Петербург</div></div>
-								<div class="type_tag"><div class="tag_text">Удаленно</div></div>
-							</div>
-							<div class="vacancy_footer">
-								<div class="vacancy_salary"><span class="salary_text">от 60 000₽</span></div>
-								<div class="vacancy_about">Подробнее о вакансии</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				</section>
 				<div class="button_wrapper">
 					<button class="btn load_more">Показать еще вакансии</button>
 				</div>
 			</article>
-			<footer class="footer">
-				<div class="footer_wrapper">
+			<footer class="footer base_wrapper">
+				<div class="footer_wrapper ">
 					<div class="footer_body">
 						<div class="footer_left">
 							<div class="logo logo_white"><img src="imgs/logo-white.png" alt="logo" /></div>
@@ -206,7 +261,9 @@
 									<div class="navbar_item">Тарифы</div>
 								</div>
 							</div>
+							<div class="hr"></div>
 							<div class="footer_info">
+								<div class="copy">&copy; 2023 Rekroo</div>
 								<ul class="info_docs">
 									<li class="info_item">Политика конфиденциальности</li>
 								</ul>

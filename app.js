@@ -1,31 +1,113 @@
+
 var basic = new Vue({
 	el: '#mainContent',
-	data: {
-		icon_class: {
+	data() {
+		return {
+			rendering: true,
+			render_filters: true,
+			base_filters: true,
+			loading: true,
+			info: null,
+			errored: false,
+			systemParams: null,
+			currencies: {
+				'rub': '₽',
+				'₽': '₽',
+				'$': '$'
+			},
+			icon_class: {
 			without_icon: false,
-		},
-		remote_work: {
-			checked: false,
-		},
-		selections: [
-			{ name: 'city',
-			options: ['Москва', 'Санкт-Петербург', 'Архангельск', 'Астрахань', 'Барнаул', 'Благовещенск', 'Брянск'],
-			default: 'Город'
 			},
-			{ name: 'area',
-			options: ['', '', '', '', '', '', '', ''],
-			default: 'Сфера'
+			remote_work_options: {
+				0: false,
+				1: 'Удаленно'
 			},
-			{name: 'type',
-			options: ['', '', '', '', '', '', '', ''],
-			default: 'Формат работы',
+			remote_work: {
+				checked: false,
 			},
-			{ name: 'salary',
-			options: ['', '', '', '', '', '', '', ''],
-			default: 'Зарплата от, ₽'
-			},
-		]
-
+			selections: [
+				{ name: 'city',
+				options: [],
+				default: 'Город'
+				},
+				{ name: 'area',
+				options: [],
+				default: 'Сфера'
+				},
+				{name: 'type',
+				options: [],
+				default: 'Формат работы',
+				},
+				{ name: 'salary',
+				options: [],
+				default: 'Зарплата от, ₽'
+				},
+			],
+		}
+	},
+	mounted (){
+		if (this.rendering){
+			axios
+				.get('https://api.rekroo.org/pa/vacancy/search')
+				.then(response => {
+					this.info = response
+				})
+				.catch(error => {
+					console.log(error)
+					this.errored = true
+				})
+				.finally(() => this.loading = false)
+		}
+		if (this.base_filters){
+			axios
+				.get('https://api.rekroo.org/pa/user/get/me')
+				.then(response => {
+					emp_types = this.selections[2].options
+					this.systemParams = response.data.systemParams
+					$.each(this.systemParams, function(param_name, param_values){
+						if (param_name === 'employment_types'){
+							$.each(param_values, function(key, value){
+								emp_types.push(value)
+							})
+						}
+					})
+				})
+				.catch(error => {
+					console.log(error)
+					this.errored = true
+				})
+		}
+		if (this.render_filters){
+			axios
+				.get('https://api.rekroo.org/pa/vacancy/search')
+				.then(response => {
+					resp = response.data.response
+					cities_list = this.selections[0].options
+					types = this.selections[1].options
+					salaries = this.selections[3].options
+					$.each(resp, function(){
+						city = $(this)[0].location
+						type_ = $(this)[0].company_info.type
+						salary = $(this)[0].salary_from
+						if (city){
+							if (cities_list.indexOf(city) === -1){
+							cities_list.push(city);
+							}
+						}
+						if (type_){
+							if (types.indexOf(type_) === -1){
+								types.push(type_)
+							}
+						}
+						if (salary){
+							if (salaries.indexOf(salary) === -1){
+								salaries.push(salary)
+							}
+						}
+					})
+				})
+				.catch(error => console.log(error))
+		}		
 	},
 	methods:{
 		hideIcon: function(){
@@ -91,6 +173,8 @@ var basic = new Vue({
 			if (((cur_target.classList.contains('selected')) && (cur_target.classList.contains('not_empty')))){
 				var selection = cur_target.parentElement.querySelector('.selection_options');
 				cur_target.innerHTML = cur_target.getAttribute('data-default');
+				var target = cur_target.parentElement.querySelector('.selection_options').getAttribute('data-target');
+				document.querySelector('input[name=' + target + ']').value = '';
 				cur_target.classList.remove('not_empty');
 			} else if (cur_target.className === 'selected'){
 				this.closeOthers();
@@ -102,6 +186,8 @@ var basic = new Vue({
 				}
 			} else if (cur_target.className === 'option'){
 				cur_target.parentElement.parentElement.querySelector('.selected').innerHTML = cur_target.textContent;
+				var target = cur_target.parentElement.getAttribute('data-target');
+				document.querySelector('input[name='+ target + ']').value = cur_target.textContent;
 				cur_target.parentElement.classList.remove('opened');
 				cur_target.parentElement.parentElement.querySelector('.selected').classList.add('not_empty');
 			}
@@ -115,6 +201,50 @@ var basic = new Vue({
 					$(this).children('.selection_options').removeClass('opened');
 				}
 			})
+		},
+		handlePreview: function(){
+			console.log(event.target);
+		},
+		handleFilters: function(){
+			var form = event.target;
+			params = [];
+			var remote = (form.querySelector('#remote').classList.contains('checked')) ? params.push('remote_work=1') : params.push('remote_work=0');
+			var position = (form.querySelector('#position').value) ? params.push('q=' + form.querySelector('#position').value) : null;
+			var city = form.querySelector('#filterCity').value ? params.push('location=' + form.querySelector('#filterCity').value) : null;
+			var area = form.querySelector('#filterArea').value ? params.push('area='+ form.querySelector('#filterArea').value) : null;
+			var emp_type = null;
+			var sysParams = this.systemParams.employment_types;
+			if (form.querySelector('#filterType').value){
+				$.each(sysParams, function(type_int, type_string){
+					if (type_string === form.querySelector('#filterType').value){
+						params.push('employment_type=' + type_int);
+					} 
+				})
+			}
+			var salary = form.querySelector('#filterSalary').value ? params.push('salary_from=' + form.querySelector('#filterSalary').value) : null;
+			var link = (params) ? 'https://api.rekroo.org/pa/vacancy/search?' + params.join('&') : 'https://api.rekroo.org/pa/vacancy/search';
+			console.log(params);
+			axios
+				.get(link)
+				.then(response => {
+					this.info = response
+					console.log(response)
+				})
+				.catch(error => {
+					console.log(error)
+					this.errored = true
+				})
+				.finally(() => this.loading = false)
+		},
+		openBurger: function(){
+			if (event.target.className === 'navbar_burger'){
+				event.target.classList.add('opened');
+			}
+		},
+		closeBurger: function(){
+			if (event.target.className === 'menu_wrapper'){
+				event.target.parentElement.classList.remove('opened');
+			}
 		}
-	}
+	},
 });
