@@ -234,6 +234,10 @@
 	.vacancies_wrapper .vacancy_footer{
 		display: none;
 	}
+	.vacancies_wrapper .loading-complete .result{
+		display: flex;
+		flex-direction: column;
+	}
 	.footer .footer_wrapper{
 		padding: 28px;
 		height: 184px;
@@ -277,6 +281,12 @@
 	}
 	.carousel_wrapper{
 		padding: 52px 0;
+	}
+	.result .vacancy_tags{
+		flex-wrap: wrap;
+	}
+	.vacancies .result .vacancy_tags > div{
+		margin-bottom: 4px;
 	}
 	.footer .footer_wrapper{
 		height: auto;
@@ -390,9 +400,6 @@
 	.vacancies .vacancy_tags{
 		flex-wrap: wrap;
 	}
-	.vacancies .vacancy_tags > div{
-		margin-bottom: 4px;
-	}
 	.vacancies .button_wrapper{
 		margin-top: 40px;
 	}
@@ -449,5 +456,8 @@
 	}
 	.carousel .carousel_body {
 		padding-left: 20px;
+	}
+	.carousel .carousel_body .vacancy_card{
+		max-width: 90%;
 	}
 }
