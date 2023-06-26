@@ -223,12 +223,10 @@ var basic = new Vue({
 			}
 			var salary = form.querySelector('#filterSalary').value ? params.push('salary_from=' + form.querySelector('#filterSalary').value) : null;
 			var link = (params) ? 'https://api.rekroo.org/pa/vacancy/search?' + params.join('&') : 'https://api.rekroo.org/pa/vacancy/search';
-			console.log(params);
 			axios
 				.get(link)
 				.then(response => {
 					this.info = response
-					console.log(response)
 				})
 				.catch(error => {
 					console.log(error)

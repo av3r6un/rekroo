@@ -231,6 +231,10 @@
 		width: auto;
 		margin-right: 0;
 	}
+	.filter_form .selection .selection_options.opened{
+		z-index: 1;
+	}
+
 	.vacancies_wrapper .vacancy_footer{
 		display: none;
 	}
