@@ -339,6 +339,13 @@
 		width: 100%;
 		margin: 20px 0;
 	}
+	.footer .navbar_column{
+		margin-right: 0;
+		margin-bottom: 12px;
+	}
+	.footer .navbar_column .navbar_item.item_bold{
+		margin-bottom: 4px;
+	}
 	.footer .footer_info .copy{
 		display: block;
 		margin-bottom: 8px;
