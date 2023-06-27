@@ -92,8 +92,38 @@
 							<input type="text" name="search" id="search" placeholder="Должность, компания" autocomplete="off" v-on:input="hideIcon">
 						</div>
 						<div class="search_button">
-							<button class="btn btn_search">Найти работу</button>
+							<button class="btn btn_search" v-on:click="handleSearch">Найти работу</button>
 						</div>
+						<div class="filters_modal">
+							<div class="filters_button" v-on:click="openForm"><div class="button_text">Фильтры</div></div>
+							<div class="modal_wrapper">
+								<form class="filter_form" v-on:submit.prevent="handleFilters">
+									<div class="close_button" v-on:click="closeForm">&#10005;</div>
+									<div class="form_name">Фильтры</div>
+									<input type="text" name="q" id="position" class="filter_input" placeholder="Должность" autocomplete="off">
+									<input type="hidden" name="location" id="filterCity">
+									<input type="hidden" name="area" id="filterArea">
+									<input type="hidden" name="employment_type" id="filterType">
+									<input type="hidden" name="salary_from" id="filterSalary">
+									<div v-for="selection in selections" class="selection" v-on:click="toggleOptions">
+										<div class="selection_options" :data-target="selection.name">
+											<div class="option" v-for="option in selection.options">{{option}}</div>
+										</div>
+										<div class="selected" :data-default="selection.default">{{selection.default}}</div>
+									</div>
+									<div class="remote_option">
+										<input type="checkbox" name="remote" id="remote" v-on:change="onOff" v-bind:class="remote_work" class="custom_check">
+										<div class="checkbox" v-on:click="changeState">
+											<div class="checkbox_check" id="toggle"></div>
+										</div>
+										<div class="checkbox_label"><label for="remote">Можно удаленно</label></div>
+									</div>
+									<button class="btn main_button" type="submit">Смотреть вакансии</button>
+									<div class="clear_filters" v-on:click="clearFilters">Сбросить все</div>
+								</form>
+							</div>
+						</div>
+						<div class="tag_container"><div class="tags_body" id="tagsBody" v-on:click="deleteTag"></div></div>
 					</div>
 				</div>
 			</article>
@@ -103,7 +133,7 @@
 						<div class="carousel_title">
 							Лучшие вакансии&nbsp;недели
 						</div>
-						<div class="carousel_arrows">
+						<div class="carousel_arrows" v-on:click="moveSlider">
 							<div class="arrow_left">&#8592;</div>
 							<div class="arrow_right">&#8594;</div>
 						</div>	
@@ -119,10 +149,37 @@
 							</div>
 							<div class="vacancy_salary"><span class="salary_text">от 60 000₽</span></div>
 						</div>
+						<div class="vacancy_card">
+							<div class="vacancy_comp">Рекламное агенство Нерв</div>
+							<div class="vacancy_job">Менеджер по продажам и аккаунтингу</div>
+							<div class="vacancy_tags">
+								<div class="loc_tag"><div class="tag_text">Санкт-Петербург</div></div>
+								<div class="type_tag"><div class="tag_text">Удаленно</div></div>
+							</div>
+							<div class="vacancy_salary"><span class="salary_text">от 60 000₽</span></div>
+						</div>
+						<div class="vacancy_card">
+							<div class="vacancy_comp">Рекламное агенство Нерв</div>
+							<div class="vacancy_job">Менеджер по продажам и аккаунтингу</div>
+							<div class="vacancy_tags">
+								<div class="loc_tag"><div class="tag_text">Санкт-Петербург</div></div>
+								<div class="type_tag"><div class="tag_text">Удаленно</div></div>
+							</div>
+							<div class="vacancy_salary"><span class="salary_text">от 60 000₽</span></div>
+						</div>
+						<div class="vacancy_card">
+							<div class="vacancy_comp">Рекламное агенство Нерв</div>
+							<div class="vacancy_job">Менеджер по продажам и аккаунтингу</div>
+							<div class="vacancy_tags">
+								<div class="loc_tag"><div class="tag_text">Санкт-Петербург</div></div>
+								<div class="type_tag"><div class="tag_text">Удаленно</div></div>
+							</div>
+							<div class="vacancy_salary"><span class="salary_text">от 60 000₽</span></div>
+						</div>
 					</div>
 				</div>
 			</article>
-			<article class="filters base_wrapper" id="basic">
+			<article class="filters base_wrapper">
 				<div class="filters_wrapper">
 					<div class="filters_header">
 						<div class="filters_title">Фильтры</div>
@@ -137,11 +194,11 @@
 								</div>
 								<div class="checkbox_label"><label for="remote">Можно удаленно</label></div>
 							</div>
-							<input type="text" name="position" id="position" class="filter_input" placeholder="Должность" autocomplete="off">
-							<input type="hidden" name="city" id="filterCity">
+							<input type="text" name="q" id="position" class="filter_input" placeholder="Должность" autocomplete="off">
+							<input type="hidden" name="location" id="filterCity">
 							<input type="hidden" name="area" id="filterArea">
-							<input type="hidden" name="type" id="filterType">
-							<input type="hidden" name="salary" id="filterSalary">
+							<input type="hidden" name="employment_type" id="filterType">
+							<input type="hidden" name="salary_from" id="filterSalary">
 							<div v-for="selection in selections" class="selection" v-on:click="toggleOptions">
 								<div class="selection_options" :data-target="selection.name">
 									<div class="option" v-for="option in selection.options">{{option}}</div>

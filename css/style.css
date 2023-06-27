@@ -30,6 +30,7 @@ body{
 	min-width: 132px;
 	align-items: center;
 	justify-content: center;
+	cursor: pointer;
 }
 input:focus-visible{
 	outline: none;
@@ -66,6 +67,9 @@ input:focus-visible{
 	margin-right: 36px;
 	display: flex;
 	align-items: center;
+}
+.navbar_item{
+	cursor: pointer;
 }
 .navbar_items .navbar_item:last-child{
 	margin-right: 0;
@@ -280,6 +284,7 @@ input:focus-visible{
 	font-size: 14px;
 	font-weight: 600;
 	font-family: var(--font);
+	cursor: pointer;
 }
 .search_input #search::placeholder{
 	padding-left: 36px;
@@ -370,6 +375,133 @@ input:focus-visible{
 	height: 50px;
 	width: 50px;
 }
+.banner_form{
+	width: 100%;
+}
+.filters_modal{
+	width: 100%;
+	margin-top: 12px;
+}
+.filters_modal .filters_button{
+	height: 32px;
+	border-radius: 5px;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 130%;
+	background: #DADBDD;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	display: none;
+	cursor: pointer;
+}
+.filters_modal .modal_wrapper{
+	display: none;
+}
+.filters_modal.opened .modal_wrapper{
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, .6);
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+	width: 100%;
+	height: 100vh;
+	z-index: 1;
+	overflow-y: hidden;
+}
+.filters_modal.opened input[name=q]{
+	visibility: hidden;
+	position: absolute;
+	width: 0;
+	height: 0;
+}
+.filters_modal.opened .filter_form{
+	position: relative;
+	padding: 48px 20px;
+	display: flex !important;
+	flex-direction: column;
+	width: 100%;
+	background: var(--light-grey);
+	border-radius: 12px;
+}
+.filters_modal.opened .filter_form .remote_option{
+	position: relative;
+	bottom: unset;
+	font-weight: 500;
+}
+.filters_modal.opened .filter_form .main_button{
+	margin-top: 24px;
+	font-weight: 600;
+	cursor: pointer;
+}
+.filters_modal.opened .filter_form .form_name{
+	font-size: 18px;
+	font-weight: bold;
+	margin-bottom: 16px;
+}
+.filters_modal.opened .filter_form .close_button{
+	position: absolute;
+	right: 16px;
+	top: 16px;
+	font-size: 16px;
+	color: var(--gray-text);
+	cursor: pointer;
+}
+.filters_modal .filters_button .button_text{
+	position: relative;
+}
+.filters_modal .filters_button .button_text:before{
+	position: absolute;
+	width: 14px;
+	height: 14px;
+	content: '';
+	left: -16px;
+	background: url('../imgs/funnel.svg') no-repeat 100% / contain;
+}
+.filters_modal .filter_form .clear_filters{
+	text-align: center;
+	color: var(--gray-text);
+	margin-top: 10px;
+	font-size: 16px;
+}
+.filters_modal + .tag_container .tags_body{
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	margin-top: 8px;
+}
+.filters_modal + .tag_container{
+	width: 100%;
+	display: none;
+}
+.tag_container .tags_body .filter_tag{
+	position: relative;
+	margin-right: 4px;
+	border-radius: 8px;
+	background: #CED9E3;
+	padding: 0 8px;
+	height: 28px;
+	display: flex;
+	align-items: center;
+	padding-right: 25px;
+	margin-bottom: 5px;
+	font-size: 12px;
+/*	pointer-events: none;*/
+}
+
+.tag_container .tags_body .filter_tag:after{
+	content: "\2716";
+	position: absolute;
+	right: 9px;
+	font-size: 13px;
+	font-weight: bold;
+	pointer-events: all;
+}
+
 
 /* CAROUSEL */
 .carousel_wrapper{
@@ -401,6 +533,7 @@ input:focus-visible{
 	width: 54px;
 	border-radius: 50%;
 	font-size: 20px;
+	cursor: pointer;
 }
 .carousel_arrows .arrow_left{
 	background: white;
@@ -414,7 +547,12 @@ input:focus-visible{
 	padding-left: 48px;
 	display: flex;
 	align-items: center;
-	overflow: hidden;
+	overflow: auto;
+}
+.carousel_body::-webkit-scrollbar{
+	-webkit-appearance: none;
+	height: 0;
+	width: 0;
 }
 .vacancy_card{
 	display: flex;
@@ -470,6 +608,9 @@ input:focus-visible{
 	top: calc(50% - 12px);
 	left: 12px;
 }
+.vacancy_tags .salary_tag{
+	display: none;
+}
 .type_tag:before{
 	background: url('../imgs/Remote.svg') no-repeat 100% / contain;
 }
@@ -521,6 +662,7 @@ input:focus-visible{
 .filter_form .main_button{
 	font-size: 14px;
 	height: 50px;
+	cursor: pointer;
 }
 .filter_input{
 	border: none;
@@ -736,6 +878,7 @@ input:focus-visible{
 	height: 50px;
 	max-width: 650px;
 	width: 50%;
+	cursor: pointer;
 }
 
 /* FOOTER */

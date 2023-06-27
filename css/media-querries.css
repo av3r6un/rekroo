@@ -151,6 +151,7 @@
 	.footer .info_item,
 	.footer .copy{
 		font-size: 14px;
+		cursor: pointer;
 	}
 }
 @media screen and (max-width: 890px){
@@ -206,6 +207,9 @@
 	}
 	.vacancy_tags .tag_text{
 		margin-left: 14px;
+	}
+	.vacancy_tags .salary_tag{
+		display: block;
 	}
 	.filter_form{
 		display: grid !important;
@@ -470,5 +474,14 @@
 	}
 	.carousel .carousel_body .vacancy_card{
 		max-width: 90%;
+	}
+	.filters_modal .filters_button{
+		display: flex;
+	}
+	.filters_modal.opened .modal_wrapper{
+		display: flex;
+	}
+	.filters_modal + .tag_container{
+		display: block;
 	}
 }
